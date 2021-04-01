@@ -44,22 +44,15 @@ export class TodoPage extends Component{
     }
 
     Loeschen (){
-        this.setState(state =>{
-            console.log(state.todo)
-            this.state.is_checked.forEach(item =>{
-                var filtered = state.todos.filter(e=> e !== item)
-                state.todos = filtered
+        this.state.is_checked.forEach(item =>{
+            var ind = this.state.todos.indexOf(item)
+            this.setState(state =>{
+                this.state.todos.splice(ind,1)
+                state.is_checked = []
             })
-            console.log(this.state.is_checked)
-            console.log(this.state.todos)
-            //           state.is_checked.forEach(item =>{
- //               state.todos.filter(item);
- //               console.log(state.todos);
- //               state.is_checked.pop(item);
- //               console.log(state.is_checked);
- //           })
         })
-        return 
+        console.log(this.state.todos);
+        console.log(this.state.is_checked);
     }
     ShowTodo (){
         console.log(`${this.state.todos}`)
