@@ -1,0 +1,18 @@
+.Panel-panel{
+    color: grey;
+    background-color:lightgreen;
+    border-color: black;
+    border-width: -5px;
+    border-style: double;
+    border-radius: 5px;
+}
+.Panel-title{
+    color:red;
+    background-color: seagreen;
+    border-style: dashed;
+    border-width: 3px;
+}
+.Panel-body{
+    color: blue;
+    background-color: tan;
+}
