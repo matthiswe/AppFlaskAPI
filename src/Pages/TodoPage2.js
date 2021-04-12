@@ -1,9 +1,9 @@
 import { Button, Input } from "antd";
 import React, { Component } from "react";
-import { Row, Col, List } from 'antd';
+import { Row, Col } from 'antd';
 import { Checkbox } from 'antd';
 
-export class TodoPage extends Component{
+export class TodoPage2 extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -65,8 +65,11 @@ export class TodoPage extends Component{
                         value={this.state.value}
                         onChange={this.onChangeValue}>
                     </Input>
-                    <Checkbox.Group options={this.state.todos} defaultValue={[]} onChange={this.onChangeCheck}>
-                        <List>{this.state.todos}</List></Checkbox.Group>
+                    <Checkbox.Group onChange={this.onChangeCheck}>
+                        {this.state.todos.map(todo =>(
+                            <Row><Col span={12}><Checkbox value={todo}>{todo}</Checkbox></Col></Row>
+                        ))}
+                    </Checkbox.Group>
                     <br></br>
                     <Button type="button" onClick={this.Zufuegen}>Zufügen</Button>
                     <Button type="button" onClick={this.Loeschen}>Löschen</Button>

@@ -8,6 +8,7 @@ import {
 import {TodoPage} from "./Pages/TodoPage";
 import SecondPage from "./Pages/SecondPage";
 import { AboutPage } from "./Pages/AboutPage";
+import { TodoPage2 } from "./Pages/TodoPage2";
 
 import { Layout, Menu } from 'antd';
 import './index.css';
@@ -38,6 +39,13 @@ const routes = [
     name: "Second",
     //exact: true,
     main: () => <SecondPage />
+  },
+  {
+    path: "/todopage2",
+    item: <UserOutlined />,
+    name: "Todos2",
+    //exact: true,
+    main: () => <TodoPage2 />
   }
 ];
 
