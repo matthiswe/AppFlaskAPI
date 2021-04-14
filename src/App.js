@@ -30,21 +30,21 @@ const routes = [
     path: "/todopage",
     item: <UserOutlined />,
     name: "Todos",
-    //exact: true,
+    exact: true,
     main: () => <TodoPage />
   },
   {
     path: "/secondpage",
     item: <VideoCameraOutlined />,
     name: "Second",
-    //exact: true,
+    exact: true,
     main: () => <SecondPage />
   },
   {
     path: "/todopage2",
     item: <UserOutlined />,
     name: "Todos2",
-    //exact: true,
+    exact: true,
     main: () => <TodoPage2 />
   }
 ];
@@ -67,24 +67,27 @@ class App extends React.Component {
         <Router>
           <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
             <Menu theme="dark" mode="inline">
-                {routes.map((route, index) =>(
+                {routes.map(( route, index) =>(
                   <Menu.Item key={index} icon={route.item}>
-                    <Link key={index} to={route.path} exact={route.exact}>{ route.name }</Link>
+                    <Link key={index} to={route.path} exact={`${route.exact}`}>{ route.name }</Link>
                   </Menu.Item>
                 ))}
             </Menu>
           </Sider>
           <Layout className="site-layout">
             <Header className="site-layout-background" style={{ padding: 0 }}>
-              <Switch>  
+              <Switch> 
+                <React.Fragment>
                 {routes.map((route, index) =>(
-                    <Link key={index} to={route.path} exact={route.exact}>{ route.name }</Link>
+                    <Link key={index} to={route.path} exact={`${route.exact}`}>{ route.name }</Link>
                   ))}
+                </React.Fragment>
               </Switch>
             </Header>
             <Content style={{ margin: '0 16px' }}>
               <div style={{ flex: 1, padding: "10px" }}>
                 <Switch>
+                <React.Fragment>
                   {routes.map((route, index) => (
                     <Route
                       key={index}
@@ -93,6 +96,7 @@ class App extends React.Component {
                       children={<route.main />}
                     />
                   ))}
+                </React.Fragment>
                 </Switch>
               </div>
             </Content>
