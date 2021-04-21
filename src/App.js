@@ -1,20 +1,24 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {TodoPage} from "./Pages/TodoPage";
 import SecondPage from "./Pages/SecondPage";
 import { AboutPage } from "./Pages/AboutPage";
-import { TodoPage2 } from "./Pages/TodoPage2";
+import TodoList from './Pages/TodoList';
+import Wikipedia from './Pages/Wikipedia';
+import Navigation from "./Components/Card/navigation"
 
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import './index.css';
 import 'antd/dist/antd.css';
 
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
+import { Provider } from 'react-redux';
+//import { createStore } from 'redux';
+//import reduce from './reducers/index';
+import {connect} from 'react-redux';
+import store from './reducers/index';
+
+//let store = createStore(reduce);
 
 const { Header, Content, Sider } = Layout;
 
@@ -41,21 +45,28 @@ const routes = [
     main: () => <SecondPage />
   },
   {
-    path: "/todopage2",
+    path: "/todopagered",
     item: <UserOutlined />,
-    name: "Todos2",
+    name: "TodoRed",
     exact: true,
-    main: () => <TodoPage2 />
+    main: () => <TodoList />
+  },
+  {
+    path: "/wiki",
+    item: <UserOutlined />,
+    name: "Wikipedia",
+    exact: true,
+    main: () => <Wikipedia />
   }
 ];
 
 class App extends React.Component {
+    
     state = {
       collapsed: false,
     };
   
     onCollapse = collapsed => {
-      console.log(collapsed);
       this.setState({ collapsed });
     }; 
     
@@ -66,45 +77,41 @@ class App extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Router>
           <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
-            <Menu theme="dark" mode="inline">
-                {routes.map(( route, index) =>(
-                  <Menu.Item key={index} icon={route.item}>
-                    <Link key={index} to={route.path} exact={`${route.exact}`}>{ route.name }</Link>
-                  </Menu.Item>
-                ))}
-            </Menu>
+            {<Navigation menuitems={routes}/>}
           </Sider>
           <Layout className="site-layout">
-            <Header className="site-layout-background" style={{ padding: 0 }}>
-              <Switch> 
-                <React.Fragment>
-                {routes.map((route, index) =>(
-                    <Link key={index} to={route.path} exact={`${route.exact}`}>{ route.name }</Link>
-                  ))}
-                </React.Fragment>
-              </Switch>
-            </Header>
+            <Header className="site-layout-background" style={{ padding: 0 }}></Header>
             <Content style={{ margin: '0 16px' }}>
-              <div style={{ flex: 1, padding: "10px" }}>
-                <Switch>
-                <React.Fragment>
-                  {routes.map((route, index) => (
-                    <Route
-                      key={index}
-                      path={route.path}
-                      exact={route.exact}
-                      children={<route.main />}
-                    />
-                  ))}
-                </React.Fragment>
-                </Switch>
-              </div>
-            </Content>
+              <Provider store={store}>
+                <div style={{ flex: 1, padding: "10px" }}>
+                  <Switch>
+                    {routes.map((route, index) => (
+                      <Route
+                        key={index}
+                        path={route.path}
+                        exact={route.exact}
+                        children={<route.main />}
+                      />
+                    ))}
+                  </Switch>
+                </div>
+              </Provider>
+            </Content>  
           </Layout>
         </Router>              
       </Layout>
     );
 }
 }
-export default App;
+
+let mapStateToProps = (state) =>{
+  return state;
+}
+
+let mapDispatchToProps ={}
+
+let AppContainer = 
+  connect(mapStateToProps, mapDispatchToProps) (App);
+
+export default AppContainer;
 

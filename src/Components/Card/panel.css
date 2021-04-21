@@ -1,18 +1,18 @@
-.Panel-panel{
+.CPanel-panel{
     color: grey;
-    background-color:lightgreen;
+    background-color:lightgrey;
     border-color: black;
     border-width: -5px;
     border-style: double;
     border-radius: 5px;
 }
-.Panel-title{
-    color:red;
-    background-color: seagreen;
+.CPanel-title{
+    color: black;
+    background-color: darkgrey;
     border-style: dashed;
     border-width: 3px;
 }
-.Panel-body{
-    color: blue;
-    background-color: tan;
+.CPanel-body{
+    color: black;
+    background-color: lightgrey;
 }
